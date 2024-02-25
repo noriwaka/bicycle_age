@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('name');
-            $table->string('image');
-            $table->date('purchase_day');
+            $table->string('image')->nullable();
+            $table->date('purchase_day')->nullable();
             $table->unsignedBigInteger('total_mileage');
             $table->timestamps();
             
