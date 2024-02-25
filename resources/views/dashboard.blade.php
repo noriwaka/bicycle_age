@@ -1,17 +1,25 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
+@section('content2')
+    <div class="flex justify-center">
+        <form method="POST" action="{{ route('register') }}" class="w-1/2">
+            @csrf
+                <h2 class="text-center font-medium my-4">メールアドレスとパスワードを入力してログイン</h2>
+                
+                <div class="form-control my-4">
+                <label for="email" class="label">
+                    <span class="label-text font-medium">メールアドレス</span>
+                </label>
+                <input type="email" name="email" class="input input-bordered w-full">
             </div>
-        </div>
+
+            <div class="form-control my-4">
+                <label for="password" class="label">
+                    <span class="label-text font-medium">パスワード</span>
+                </label>
+                <input type="password" name="password" class="input input-bordered w-full">
+            </div>
+                <button type="submit" class="btn btn-primary normal-case w-full mt-8" href="{{ route('login') }}">ログイン</a>
+        </form>
     </div>
-</x-app-layout>
+@endsection('content2')
