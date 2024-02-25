@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="flex justify-center">
-        <form method="POST" action="{{ route('register') }}" class="w-1/2">
+        <form method="POST" action="{{ route('login') }}" class="w-1/2">
             @csrf
                 <h2 class="text-center font-medium my-4">メールアドレスとパスワードを入力してログイン</h2>
                 
@@ -19,7 +19,7 @@
                 </label>
                 <input type="password" name="password" class="input input-bordered w-full">
             </div>
-                <button type="submit" class="btn btn-primary normal-case w-full mt-8" href="{{ route('login') }}">ログイン</a>
+                <button type="submit" class="btn btn-primary normal-case w-full mt-8" href="{{ route('login') }}"><a>ログイン</a></button>
         </form>
     </div>
 @endsection('content')

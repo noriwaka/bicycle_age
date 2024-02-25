@@ -1,6 +1,6 @@
 @if (Auth::check())
     {{-- Editページへのリンク --}}
-    <li><a class="link link-hover" href="#">Edit</a></li>
+    <li><a class="link link-hover" href="{{ route('edit') }}">Edit</a></li>
     {{-- Blogページへのリンク --}}
     <li><a class="link link-hover" href="#">Blog</a></li>
     <li class="divider lg:hidden"></li>
