@@ -48,4 +48,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(Bicycle::class);
     }
+    
+    //ユーザー自転車の名前を取得
+    public function bicycleName()
+    {
+        $bicycle = $this->bicycle()->first();
+        //$bicycleが条件式、真なら$bicycle->nameが、それ以外はnullを返す
+        return $bicycle ? $bicycle->name : null;
+    }
 }
