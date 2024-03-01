@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PartsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 
 Route::group(['middleware' => ['auth']], function () {
         Route::get('/edit', [UserController::class, 'show'])->name('edit');
+        //本来はputだが、htmlフォームはput,patchはサポートしていないので@method(put)により指定
+        Route::post('/parts/update', [PartsController::class, 'updateAll'])->name('parts.update.all');
     });
 
 

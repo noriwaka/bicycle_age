@@ -3,28 +3,33 @@
 @section('content')
 
 @if(Auth::check())
-    <div class="prose hero bg-base-200 mx-auto max-w-full rounded">
-        <div class="hero-content text-center my-10">
-            <div class="max-w-md mb-10">
-                <h2>{{ Auth::user()->bicycle->name ?? '自転車が登録されていません' }}</h2>
-                <ul>
+    <div class="container mx-auto p-4">
+        <div class="text-center my-10">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold">{{ Auth::user()->getBicycleName() }}</h2>
+                <!-- グリッドレイアウトを適用したパーツリスト -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
                     @forelse ($parts as $part)
-                        <li>{{ $part->name }} - 走行距離: {{ $part->distance }}km</li>
+                        <div class="flex justify-between items-center p-4 bg-white shadow-md rounded-lg">
+                            <span class="text-lg font-semibold">{{ $part->name }}</span>
+                            <span class="text-sm">走行距離: {{ $part->mileage }}km</span>
+                        </div>
                     @empty
-                        <li>パーツがありません。</li>
+                        <div class="col-span-full text-center p-4 bg-white shadow-md rounded-lg">
+                            <span>パーツがありません。</span>
+                        </div>
                     @endforelse
-                </ul>
+                </div>
             </div>
-       
         </div>
     </div>
 @else
-    <div class="prose hero bg-base-200 mx-auto max-w-full rounded">
-        <div class="hero-content text-center my-10">
-            <div class="max-w-md mb-10">
+    <div class="container mx-auto p-4">
+        <div class="text-center my-10">
+            <div class="mb-10">
                 <h2>サービスを利用するためにはログインして下さい</h2>
                     {{-- ログインページへのリンク --}}
-                <a class="btn btn-primary normal-case w-full mt-8" href="{{ route('login') }}">ログインページへ</a>
+                <a class="btn btn-primary normal-case w-1/2 mt-8" href="{{ route('login') }}">ログインページへ</a>
             </div>
         </div>
     </div>
