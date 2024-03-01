@@ -18,16 +18,14 @@ use App\Http\Controllers\PartsController;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::group(['middleware' => ['auth']], function () {
         Route::get('/edit', [UserController::class, 'show'])->name('edit');
         //本来はputだが、htmlフォームはput,patchはサポートしていないので@method(put)により指定
-        Route::post('/parts/update', [PartsController::class, 'updateAll'])->name('parts.update.all');
+        Route::put('/parts/update', [PartsController::class, 'updateAll'])->name('parts.update.all');
     });
 
 

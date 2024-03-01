@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE users MODIFY name VARCHAR(255) NULL;');
+        DB::statement('ALTER TABLE users ALTER COLUMN name TYPE VARCHAR(255), ALTER COLUMN name DROP NOT NULL;');
     }
 
     /**
