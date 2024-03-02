@@ -26,7 +26,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/edit', [UserController::class, 'show'])->name('edit');
         //本来はputだが、htmlフォームはput,patchはサポートしていないので@method(put)により指定
         Route::put('/parts/update', [PartsController::class, 'updateAll'])->name('parts.update.all');
-        Route::put('/bicycle/name', [BicycleController::class, 'updateName'])->name('bicycle.update.name');
+        Route::put('/bicycle/info', [BicycleController::class, 'updateInfo'])->name('bicycle.update.info');
+        Route::put('/bicycle/add-mileage', [BicycleController::class, 'addmileage'])->name('bicycle.add.mileage');
+        // Route::put('/bicycle/name', [BicycleController::class, 'updateName'])->name('bicycle.update.name');
     });
 
 

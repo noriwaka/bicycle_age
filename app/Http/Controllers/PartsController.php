@@ -23,13 +23,13 @@ class PartsController extends Controller
         'newParts.*.mileage' => 'nullable|numeric|min:0|max:999999',
     ]);
 
-    // 自転車の名前の更新
+    /* 自転車の名前の更新
     // $bicycle = Auth::user()->bicycle;
     // if ($bicycle && $request->input('bicycle.name')) {
         // $bicycle->update([
             // 'name' => $request->input('bicycle.name'),
         // ]);
-    // }
+     }*/
 
     // 既存のパーツの更新処理
     foreach ($request->parts as $partData) {
@@ -53,7 +53,7 @@ class PartsController extends Controller
                 $newPart->save();
             }
         }
-    }
-        return redirect()->route('dashboard')->with('success', 'パーツが更新されました。');
+    }   
+        return redirect()->route('dashboard');/*->with('success', 'パーツが更新されました。');*/
     }
 }
