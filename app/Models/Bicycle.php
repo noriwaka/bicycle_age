@@ -29,7 +29,4 @@ class Bicycle extends Model
         return $this->hasMany(Part::class);
     }
     
-    
-    
-    
 }
