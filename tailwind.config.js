@@ -13,9 +13,11 @@ module.exports = {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                skyblue: '#87CEEB', // ここにカスタムカラーを追加
+            },
         },
     },
 
-    plugins: [require('@tailwindcss/forms')],
-    plugins: [require("@tailwindcss/typography"), require("daisyui")], // 追記
+    plugins: [require('@tailwindcss/forms'), require("@tailwindcss/typography"), require("daisyui")], // plugins を一つの配列に統合
 };

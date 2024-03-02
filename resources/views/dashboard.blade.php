@@ -29,19 +29,19 @@
                     </div>
                 @else
                     <h2>自転車が登録されていません</h2>
-                    <a class="link link-hover text-blue-500" href="{{ route('edit') }}">Editページ</a>で登録して下さい。
+                    <a class="link link-hover text-skyblue" href="{{ route('edit') }}">Editページ</a>で登録して下さい。
                 @endif
                 <!-- グリッドレイアウトを適用したパーツリスト -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
                     @forelse ($parts as $part)
-                        <div class="flex justify-between items-center p-4 bg-white shadow-md rounded-lg">
+                        <div class="flex justify-between items-center p-4 bg-skyblue shadow-md rounded-lg">
                             <span class="text-lg font-semibold">{{ $part->name }}</span>
                             <span class="text-sm">走行距離: {{ $part->mileage }}km</span>
                         </div>
                     @empty
                         <div class="col-span-full text-center p-4 bg-white shadow-md rounded-lg">
                             <p>パーツがありません</p>
-                            <p><a class="link link-hover text-blue-500" href="{{ route('edit') }}">Editページ</a>でパーツを追加して下さい</p>
+                            <p><a class="link link-hover text-skyblue" href="{{ route('edit') }}">Editページ</a>でパーツを追加して下さい</p>
                         </div>
                     @endforelse
                 </div>
