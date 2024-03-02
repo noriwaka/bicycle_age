@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Part;
 use Illuminate\Support\Facades\Auth; 
+use App\Models\User;
+use App\Models\Bicycle;
 
 class PartsController extends Controller
 {
@@ -13,7 +15,7 @@ class PartsController extends Controller
     {
         // バリデーション
         $request->validate([
-        'bicycle[name]' => 'required|string|max:255',
+        // 'bicycle[name]' => 'required|string|max:255',
         'parts.*.id' => 'exists:parts,id',
         'parts.*.name' => 'required|max:255',
         'parts.*.mileage' => 'required|numeric|min:0|max:999999',
@@ -22,12 +24,12 @@ class PartsController extends Controller
     ]);
 
     // 自転車の名前の更新
-    $bicycle = Auth::user()->bicycle;
-    if ($bicycle && $request->has('bicycle.name')) {
-        $bicycle->update([
-            'name' => $request->input('bicycle.name'),
-        ]);
-    }
+    // $bicycle = Auth::user()->bicycle;
+    // if ($bicycle && $request->input('bicycle.name')) {
+        // $bicycle->update([
+            // 'name' => $request->input('bicycle.name'),
+        // ]);
+    // }
 
     // 既存のパーツの更新処理
     foreach ($request->parts as $partData) {

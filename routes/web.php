@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\BicycleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PartsController;
 
@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/edit', [UserController::class, 'show'])->name('edit');
         //本来はputだが、htmlフォームはput,patchはサポートしていないので@method(put)により指定
         Route::put('/parts/update', [PartsController::class, 'updateAll'])->name('parts.update.all');
+        Route::put('/bicycle/name', [BicycleController::class, 'updateName'])->name('bicycle.update.name');
     });
 
 

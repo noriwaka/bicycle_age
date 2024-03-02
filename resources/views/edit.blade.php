@@ -2,23 +2,24 @@
 
 @section('content')
 <div class="container mx-auto p-4">
-    <form action="{{ route('parts.update.all') }}" method="POST">
-        @csrf
-        @method('PUT')
-        
-        <div class="mb-8 text-center">
-            <h1 class="text-xl font-bold mb-4">自転車の情報</h1>
+    <div class="mb-8 text-center">
+        <h1 class="text-xl font-bold mb-4">自転車の情報</h1>
+        <form action="{{ route('bicycle.update.name') }}" method="POST">
+            @csrf
+            @method('PUT')
+
             <div class="bg-white p-4 rounded-lg shadow">
                 <div class="mb-4">
                     <label for="bicycle_name" class="block text-sm font-medium text-gray-700 text-center">自転車名</label>
-                    <input type="text" name="bicycle[name]" id="bicycle_name" value="{{ $bicycle->name ?? '' }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-center">
+                    <input type="text" name="name" id="bicycle_name" value="{{ $bicycle->name ?? '' }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-center">
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">自転車を更新する</button>
-        </div>
-        <h1 class="text-3xl font-bold mb-4 text-center">パーツの編集</h1>
+            <button type="submit" class="btn btn-primary">自転車の名前を更新する</button>
+        </form>
+    </div>
     
         {{-- 既存のパーツの編集フィールド --}}
+    <form action="{{ route('parts.update.all') }}" method="POST">
         <div class="mb-8">
             @forelse ($parts as $index => $part)
                 <div class="flex gap-4 items-center mb-4 bg-white p-4 rounded-lg shadow">
@@ -36,7 +37,7 @@
                 <p>編集するパーツがありません。</p>
             @endforelse
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">自転車を更新する</button>
+                <button type="submit" class="btn btn-primary">パーツを更新する</button>
             </div>
         </div>
 
@@ -56,7 +57,7 @@
         </div>
         
         <div class="text-center">
-            <button type="submit" class="btn btn-primary">自転車を更新する</button>
+            <button type="submit" class="btn btn-primary">パーツを更新する</button>
         </div>
     </form>
 </div>
