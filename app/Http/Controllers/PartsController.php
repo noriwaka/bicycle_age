@@ -15,36 +15,43 @@ class PartsController extends Controller
     {
         // バリデーション
         $request->validate([
-        'parts.*.id' => 'exists:parts,id',
-        'parts.*.name' => 'required|max:255',
-        'parts.*.mileage' => 'required|numeric|min:0|max:999999',
-        'newParts.*.name' => 'nullable|max:255',
-        'newParts.*.mileage' => 'nullable|numeric|min:0|max:999999',
-    ]);
+            'parts.*.id' => 'exists:parts,id',
+            'parts.*.name' => 'required|max:255',
+            'parts.*.mileage' => 'required|numeric|min:0|max:999999',
+        ]);
 
-    // 既存のパーツの更新処理
-    foreach ($request->parts as $partData) {
-        $part = Part::findOrFail($partData['id']);
-        $part->name = $partData['name'];
-        $part->mileage = $partData['mileage'];
-        $part->save();
+        // 既存のパーツの更新処理
+        foreach ($request->parts as $partData) {
+            $part = Part::findOrFail($partData['id']);
+            $part->name = $partData['name'];
+            $part->mileage = $partData['mileage'];
+            $part->save();
+        }
+        
+        return redirect()->route('dashboard')->with('success', 'パーツが更新されました。');
     }
 
     // 新しいパーツの追加処理
-    if ($request->has('newParts')) {
+    public function addNewParts(Request $request)
+    {
+        $request->validate([
+            'newParts.*.name' => 'required|max:255',
+            'newParts.*.mileage' => 'required|numeric|min:0|max:999999',
+        ]);
+
+        $bicycleId = Auth::user()->bicycle->id;
+
         foreach ($request->newParts as $newPartData) {
-            // nameが設定されており、かつ空でないことを確認
-            if (isset($newPartData['name']) && $newPartData['name'] !== '') {
-                $newPart = new Part();
-                $newPart->name = $newPartData['name'];
-                // mileageが設定されているか確認し、設定されていなければ0を使用
-                $newPart->mileage = isset($newPartData['mileage']) ? $newPartData['mileage'] : 0;
-                $bicycleId = Auth::user()->bicycle->id;
-                $newPart->bicycle_id = $bicycleId;
+            if (!empty($newPartData['name'])) {
+                $newPart = new Part([
+                    'name' => $newPartData['name'],
+                    'mileage' => $newPartData['mileage'],
+                    'bicycle_id' => $bicycleId,
+                ]);
                 $newPart->save();
             }
         }
-    }   
-        return redirect()->route('dashboard');/*->with('success', 'パーツが更新されました。');*/
+
+        return redirect()->route('dashboard')->with('success', '新しいパーツが追加されました。');
     }
 }

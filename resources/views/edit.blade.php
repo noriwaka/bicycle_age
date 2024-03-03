@@ -45,11 +45,11 @@
                         <input type="hidden" name="parts[{{ $index }}][id]" value="{{ $part->id }}">
                         <div class="flex-1">
                             <label for="part_name_{{ $index }}" class="block text-sm font-medium text-gray-700 text-center">パーツ名</label>
-                            <input type="text" name="parts[{{ $index }}][name]" id="part_name_{{ $index }}" value="{{ $part->name }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <input type="text" name="parts[{{ $index }}][name]" id="part_name_{{ $index }}" value="{{ $part->name }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-skyblue">
                         </div>
                         <div class="flex-1">
                             <label for="part_mileage_{{ $index }}" class="block text-sm font-medium text-gray-700 text-center">走行距離(km)</label>
-                            <input type="number" name="parts[{{ $index }}][mileage]" id="part_mileage_{{ $index }}" value="{{ $part->mileage }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <input type="number" name="parts[{{ $index }}][mileage]" id="part_mileage_{{ $index }}" value="{{ $part->mileage }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-green-200">
                         </div>
                     </div>
                 @empty
@@ -62,7 +62,7 @@
 
             {{-- 新しいパーツの追加フィールド --}}
             <div class="m-8">
-                <h2 class="text-xl font-bold mb-4 text-center">新しいパーツを追加</h2>
+                <h2 class="text-xl font-bold mb-4 text-center">新しいパーツを追加(一度に二個まで追加可能)</h2>
                 @for ($i = 0; $i < 2; $i++)
                     <div class="flex gap-4 items-center mb-4 bg-white p-4 rounded-lg shadow">
                         <div class="flex-1">

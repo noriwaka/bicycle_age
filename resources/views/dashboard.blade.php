@@ -12,27 +12,26 @@ use Carbon\Carbon;
                 @if(isset($bicycle))
                     <h2 class="text-3xl font-bold">{{ $bicycle->name }}</h2>
                     <!-- 自転車の総走行距離を表示 -->
-                    <h3>総走行距離: {{ $bicycle->total_mileage }} km</h3>
+                    <h3 class="font-bold">総走行距離: {{ $bicycle->total_mileage }} km</h3>
                     @if($bicycle->purchase_day)
                         @php
                             $purchaseDate = \Carbon\Carbon::parse($bicycle->purchase_day);
                             $now = \Carbon\Carbon::now();
                             $difference = $purchaseDate->diff($now);
                         @endphp
-                    <h3>年齢: {{ $difference->y }} 年 {{ $difference->m }} ヶ月</h3>
+                    <h3 class="font-bold">年齢: {{ $difference->y }} 年 {{ $difference->m }} ヶ月</h3>
                     @else
                         <h3>購入日が登録されていません</h3>
                     @endif
                     <div class="flex justify-center items-center">
-                        <div class="w-full max-w-xs mx-auto">
+                        <div class="w-full max-w-xs mx-auto bg-#5eead4">
                             <form action="{{ route('bicycle.add.mileage') }}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                                 @csrf
                                 @method('PUT')
                                 <h2 class="block text-gray-700 text-lg font-bold mb-2 text-center">本日の走行距離</h2>
                                 <div class="mb-4">
                                     <label for="mileage" class="block text-sm font-medium text-gray-700"></label>
-                                    <input type="number" name="mileage" id="mileage" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" placeholder="0" required>
-                                    <span class="inline-block align-baseline font-bold text-sm text-gray-700 ml-2">km</span>
+                                    <input type="number" name="mileage" id="mileage" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-right" placeholder="km" required>
                                 </div>
                                 <div class="flex items-center justify-center">
                                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">決定</button>
@@ -49,7 +48,7 @@ use Carbon\Carbon;
                     @forelse ($parts as $part)
                         <div class="flex justify-between items-center p-4 bg-skyblue shadow-md rounded-lg">
                             <span class="text-lg font-semibold">{{ $part->name }}</span>
-                            <span class="text-sm">走行距離: {{ $part->mileage }}km</span>
+                            <span class="text-sm font-bold">走行距離: {{ $part->mileage }}km</span>
                         </div>
                     @empty
                         <div class="col-span-full text-center p-4 bg-white shadow-md rounded-lg">

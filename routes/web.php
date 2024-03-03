@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/parts/update', [PartsController::class, 'updateAll'])->name('parts.update.all');
         Route::put('/bicycle/info', [BicycleController::class, 'updateInfo'])->name('bicycle.update.info');
         Route::put('/bicycle/add-mileage', [BicycleController::class, 'addmileage'])->name('bicycle.add.mileage');
-        // Route::put('/bicycle/name', [BicycleController::class, 'updateName'])->name('bicycle.update.name');
+        Route::post('/parts/add', [PartsController::class, 'addNewParts'])->name('parts.add.new');
     });
 
 
