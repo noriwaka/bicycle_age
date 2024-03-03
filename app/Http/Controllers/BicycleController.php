@@ -5,28 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Bicycle;
 
 class BicycleController extends Controller
 {
     public function updateInfo(Request $request)
     {
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'total_mileage' => 'required|numeric|min:0',
-        'purchase_day' => 'required|date',
-    ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'total_mileage' => 'required|numeric|min:0',
+            'purchase_day' => 'required|date',
+        ]);
 
-    $bicycle = Auth::user()->bicycle;
-    if ($bicycle) {
-        $bicycle->update([
+        $user = Auth::user();
+
+        // ユーザーに自転車がない場合は新しく作成する
+        $bicycle = $user->bicycle ?? new Bicycle();
+        // fill()は配列の値をモデルの対応する属性に割り当てる
+        $bicycle->fill([
+            'user_id' => $user->id,
             'name' => $request->name,
             'total_mileage' => $request->total_mileage,
             'purchase_day' => $request->purchase_day,
         ]);
+        $bicycle->save();
+
         return redirect()->route('dashboard')->with('success', '自転車の情報が更新されました。');
-    } else {
-        return back()->withErrors('自転車が見つかりません。');
-    }
     }
     
     public function addMileage(Request $request)

@@ -21,11 +21,16 @@ class PartsController extends Controller
         ]);
 
         // 既存のパーツの更新処理
-        foreach ($request->parts as $partData) {
-            $part = Part::findOrFail($partData['id']);
-            $part->name = $partData['name'];
-            $part->mileage = $partData['mileage'];
-            $part->save();
+        if ($request->has('parts')) {
+            foreach ($request->input('parts', []) as $partData) {
+                // IDが指定されていれば、対応するパーツを更新
+                if (isset($partData['id'])) {
+                    $part = Part::findOrFail($partData['id']);
+                    $part->name = $partData['name'];
+                    $part->mileage = $partData['mileage'];
+                    $part->save();
+                }
+            }
         }
         
         return redirect()->route('dashboard')->with('success', 'パーツが更新されました。');
@@ -41,14 +46,15 @@ class PartsController extends Controller
 
         $bicycleId = Auth::user()->bicycle->id;
 
-        foreach ($request->newParts as $newPartData) {
-            if (!empty($newPartData['name'])) {
-                $newPart = new Part([
-                    'name' => $newPartData['name'],
-                    'mileage' => $newPartData['mileage'],
-                    'bicycle_id' => $bicycleId,
-                ]);
-                $newPart->save();
+        if ($request->has('newParts')) {
+            foreach ($request->input('newParts', []) as $newPartData) {
+                if (!empty($newPartData['name'])) {
+                    $newPart = new Part();
+                    $newPart->name = $newPartData['name'];
+                    $newPart->mileage = $newPartData['mileage'] ?? 0;
+                    $newPart->bicycle_id = $bicycleId;
+                    $newPart->save();
+                }
             }
         }
 
