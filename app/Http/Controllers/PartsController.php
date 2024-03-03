@@ -15,21 +15,12 @@ class PartsController extends Controller
     {
         // バリデーション
         $request->validate([
-        // 'bicycle[name]' => 'required|string|max:255',
         'parts.*.id' => 'exists:parts,id',
         'parts.*.name' => 'required|max:255',
         'parts.*.mileage' => 'required|numeric|min:0|max:999999',
         'newParts.*.name' => 'nullable|max:255',
         'newParts.*.mileage' => 'nullable|numeric|min:0|max:999999',
     ]);
-
-    /* 自転車の名前の更新
-    // $bicycle = Auth::user()->bicycle;
-    // if ($bicycle && $request->input('bicycle.name')) {
-        // $bicycle->update([
-            // 'name' => $request->input('bicycle.name'),
-        // ]);
-     }*/
 
     // 既存のパーツの更新処理
     foreach ($request->parts as $partData) {

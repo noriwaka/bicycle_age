@@ -13,6 +13,7 @@ class BicycleController extends Controller
     $request->validate([
         'name' => 'required|string|max:255',
         'total_mileage' => 'required|numeric|min:0',
+        'purchase_day' => 'required|date',
     ]);
 
     $bicycle = Auth::user()->bicycle;
@@ -20,6 +21,7 @@ class BicycleController extends Controller
         $bicycle->update([
             'name' => $request->name,
             'total_mileage' => $request->total_mileage,
+            'purchase_day' => $request->purchase_day,
         ]);
         return redirect()->route('dashboard')->with('success', '自転車の情報が更新されました。');
     } else {

@@ -12,7 +12,7 @@ class Bicycle extends Model
     use HasFactory;
     
     protected $fillable = [
-       'user_id', 'name', 'total_mileage',
+       'user_id', 'name', 'total_mileage','purchase_day',
     ];
     
     //この自転車を所有する唯一のユーザー
